@@ -49,3 +49,11 @@ htmlcov/
 # Local task/eval scratch
 scratch/
 eval_results_*.csv
+
+# Node / UI
+node_modules/
+dist/
+.vite/
+ui/node_modules/
+ui/dist/
+
