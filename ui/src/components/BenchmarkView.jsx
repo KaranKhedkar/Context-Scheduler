@@ -25,58 +25,58 @@ export default function BenchmarkView() {
       {/* Overview Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-1">
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-1.5">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>LLM Accuracy</span>
             <Target className="w-4 h-4 text-emerald-400" />
           </div>
-          <div className="text-2xl font-bold text-white">100.0%</div>
+          <div className="text-2xl font-bold text-white tracking-tight">100.0%</div>
           <p className="text-[11px] text-slate-400">Zero hallucination across N=30</p>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-1">
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-1.5">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Token Reduction</span>
             <TrendingDown className="w-4 h-4 text-indigo-400" />
           </div>
-          <div className="text-2xl font-bold text-white">83.0%</div>
+          <div className="text-2xl font-bold text-white tracking-tight">83.0%</div>
           <p className="text-[11px] text-slate-400">Cuts prompt token cost by &gt;80%</p>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-1">
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-1.5">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Factual Precision</span>
             <Zap className="w-4 h-4 text-slate-300" />
           </div>
-          <div className="text-2xl font-bold text-white">36.7%</div>
+          <div className="text-2xl font-bold text-white tracking-tight">36.7%</div>
           <p className="text-[11px] text-slate-400">5x higher density than full history</p>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-1">
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-1.5">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Engine Overhead</span>
             <BarChart3 className="w-4 h-4 text-slate-300" />
           </div>
-          <div className="text-2xl font-bold text-white">1.6 ms</div>
+          <div className="text-2xl font-bold text-white tracking-tight">1.6 ms</div>
           <p className="text-[11px] text-slate-400">Sub-millisecond pipeline latency</p>
         </div>
 
       </div>
 
       {/* Main Benchmark Table Card */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+      <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-6 shadow-lg shadow-black/25 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3.5">
           <div>
-            <h3 className="text-sm font-semibold text-white">Benchmark Results (N=30, 50t Budget)</h3>
+            <h3 className="text-sm font-bold text-white">Benchmark Results (N=30, 50t Budget)</h3>
             <p className="text-xs text-slate-400 mt-0.5">Two-pass LLM-as-a-judge via Groq GPT-OSS 120B at Temperature 0.0</p>
           </div>
-          <span className="text-[11px] font-mono text-slate-400">Seed=42</span>
+          <span className="text-[11px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">Seed=42</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 text-[11px]">
+              <tr className="border-b border-slate-800/80 text-slate-400 text-[11px]">
                 <th className="py-2.5 px-3">Method</th>
                 <th className="py-2.5 px-3">N</th>
                 <th className="py-2.5 px-3">Recall</th>
@@ -86,26 +86,26 @@ export default function BenchmarkView() {
                 <th className="py-2.5 px-3">Overhead</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 font-mono">
+            <tbody className="divide-y divide-slate-800/50 font-mono">
               {benchmarkTable.map((row, idx) => (
                 <tr
                   key={idx}
                   className={`transition-all ${
                     row.isHighlight
                       ? 'bg-indigo-950/30 text-white font-medium'
-                      : 'text-slate-300'
+                      : 'text-slate-300 hover:bg-slate-850/40'
                   }`}
                 >
-                  <td className="py-2.5 px-3 font-sans flex items-center gap-1.5">
+                  <td className="py-3 px-3 font-sans flex items-center gap-1.5">
                     {row.isHighlight && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
                     <span>{row.method}</span>
                   </td>
-                  <td className="py-2.5 px-3">{row.n}</td>
-                  <td className="py-2.5 px-3">{row.recall}</td>
-                  <td className="py-2.5 px-3">{row.precision}</td>
-                  <td className="py-2.5 px-3">{row.token_red}</td>
-                  <td className="py-2.5 px-3 text-emerald-400">{row.accuracy}</td>
-                  <td className="py-2.5 px-3 text-slate-400">{row.overhead}</td>
+                  <td className="py-3 px-3">{row.n}</td>
+                  <td className="py-3 px-3">{row.recall}</td>
+                  <td className="py-3 px-3">{row.precision}</td>
+                  <td className="py-3 px-3">{row.token_red}</td>
+                  <td className="py-3 px-3 text-emerald-400">{row.accuracy}</td>
+                  <td className="py-3 px-3 text-slate-400">{row.overhead}</td>
                 </tr>
               ))}
             </tbody>
@@ -114,13 +114,13 @@ export default function BenchmarkView() {
       </div>
 
       {/* Held-Out & Sweep Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Held-Out Generalization Card */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">Held-Out Cross-Validation</h4>
-            <span className="text-[11px] font-mono text-slate-400">Seed=123</span>
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-3.5">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Held-Out Cross-Validation</h4>
+            <span className="text-[11px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">Seed=123</span>
           </div>
 
           <p className="text-xs text-slate-400 leading-relaxed">
@@ -128,32 +128,32 @@ export default function BenchmarkView() {
           </p>
 
           <div className="space-y-2 text-xs font-mono">
-            <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between shadow-inner">
               <span className="text-slate-300 font-sans">Context Scheduler:</span>
               <span className="text-emerald-400 font-medium">86.7% Rec • 35.6% Prec • 82.5% Red</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between text-slate-400">
+            <div className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/60 flex items-center justify-between text-slate-400">
               <span className="font-sans">Vector RAG Baseline:</span>
               <span>83.3% Rec • 30.6% Prec • 80.5% Red</span>
             </div>
           </div>
 
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-slate-400 leading-relaxed">
             Win margin holds on unseen data (+3.4% higher recall, +5.0% higher precision).
           </p>
         </div>
 
         {/* Token Budget Sweep Card */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">Token Budget Sweep (Pareto Curve)</h4>
-            <span className="text-[11px] font-mono text-slate-400">25t – 500t</span>
+        <div className="bg-slate-900/60 border border-slate-800/60 rounded-xl p-5 shadow-lg shadow-black/25 space-y-3.5">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Token Budget Sweep (Pareto Curve)</h4>
+            <span className="text-[11px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">25t – 500t</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse font-mono">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 text-[10px]">
+                <tr className="border-b border-slate-800/80 text-slate-400 text-[10px]">
                   <th className="py-1 px-2">Budget</th>
                   <th className="py-1 px-2">CS Recall</th>
                   <th className="py-1 px-2">CS Precision</th>
@@ -166,7 +166,7 @@ export default function BenchmarkView() {
                   <tr key={idx} className={s.isDefault ? 'bg-indigo-950/20 text-white font-medium' : 'text-slate-300'}>
                     <td className="py-1.5 px-2">{s.budget}t</td>
                     <td className="py-1.5 px-2">{s.ce_rec}</td>
-                    <td className="py-1.5 px-2">{s.ce_prec}</td>
+                    <td className="py-1.5 px-2 text-slate-200">{s.ce_prec}</td>
                     <td className="py-1.5 px-2 text-emerald-400">{s.ce_red}</td>
                     <td className="py-1.5 px-2 text-slate-400">{s.rag_red}</td>
                   </tr>
@@ -175,7 +175,7 @@ export default function BenchmarkView() {
             </table>
           </div>
 
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-slate-400 leading-relaxed">
             <strong>Context Bloat Protection:</strong> At 500 tokens, Vector RAG collapses to 0% reduction, while Context Scheduler caps reduction at 72.6%, refusing redundant noise.
           </p>
         </div>

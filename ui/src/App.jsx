@@ -109,7 +109,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-indigo-500/20 selection:text-indigo-200">
+    <div className="min-h-screen text-slate-100 flex flex-col font-sans selection:bg-indigo-500/20 selection:text-indigo-200">
       
       {/* Top Navbar */}
       <Navbar
@@ -117,18 +117,18 @@ export default function App() {
         setActiveTab={setActiveTab}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
+      {/* Main Content Area with generous spacing rhythm */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         
         {/* Always-visible Persistent Decision States Legend */}
         <StatusLegend />
 
         {/* Tab 1: Chat + Live Debug Inspector */}
         {activeTab === 'chat' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
             {/* Left Column: Chat & Query Pane (5 cols) */}
-            <div className="lg:col-span-5 space-y-4">
+            <div className="lg:col-span-5 space-y-5">
               <ChatPane
                 query={query}
                 setQuery={setQuery}
@@ -147,7 +147,6 @@ export default function App() {
             <div className="lg:col-span-7">
               <LiveInspector
                 queryResult={queryResult}
-                isQuerying={isQuerying}
               />
             </div>
 
@@ -180,8 +179,8 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-[#070b14] py-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-2">
+      <footer className="border-t border-slate-900/80 bg-[#060913]/90 py-5 text-center text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
           <span>Context Scheduler • Deterministic Memory &amp; Token Budget Optimization</span>
           <span className="font-mono text-[11px] text-slate-500">Python 3.10+ • FAISS • SentenceTransformers • Groq</span>
         </div>
