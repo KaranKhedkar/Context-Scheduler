@@ -105,31 +105,27 @@ export default function App() {
   // Initial load
   useEffect(() => {
     fetchMemories();
-    // Run initial demo query
     handleRunQuery(query, 50);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-indigo-500/20 selection:text-indigo-200">
       
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        activePreset={activePreset}
-        onSelectPreset={handleSelectPreset}
-        isLoadingPreset={isLoadingPreset}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
         
         {/* Always-visible Persistent Decision States Legend */}
         <StatusLegend />
 
         {/* Tab 1: Chat + Live Debug Inspector */}
         {activeTab === 'chat' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             
             {/* Left Column: Chat & Query Pane (5 cols) */}
             <div className="lg:col-span-5 space-y-4">
@@ -141,6 +137,9 @@ export default function App() {
                 onRunQuery={handleRunQuery}
                 isQuerying={isQuerying}
                 queryResult={queryResult}
+                activePreset={activePreset}
+                onSelectPreset={handleSelectPreset}
+                isLoadingPreset={isLoadingPreset}
               />
             </div>
 
@@ -159,7 +158,6 @@ export default function App() {
         {activeTab === 'comparison' && (
           <ComparisonView
             queryResult={queryResult}
-            isQuerying={isQuerying}
           />
         )}
 
@@ -182,10 +180,10 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/60 py-4 text-center text-xs text-slate-400">
+      <footer className="border-t border-slate-900 bg-[#070b14] py-4 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-2">
           <span>Context Scheduler • Deterministic Memory &amp; Token Budget Optimization</span>
-          <span className="font-mono text-[11px] text-slate-400">Python 3.10+ • FAISS • SentenceTransformers • Groq</span>
+          <span className="font-mono text-[11px] text-slate-500">Python 3.10+ • FAISS • SentenceTransformers • Groq</span>
         </div>
       </footer>
 
