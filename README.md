@@ -6,6 +6,32 @@ Much like an operating system scheduler allocates scarce CPU cycles among compet
 
 ---
 
+## Interactive Web Dashboard
+
+A full-stack local web application (FastAPI backend + React/Tailwind frontend) provides real-time visibility into the memory scoring pipeline, deduplication triggers, and token knapsack allocation.
+
+### 1. Chat & Live Engine Inspector
+*Live query interface with interactive token budget slider, dynamic capacity fill meter, and candidate memory cards showing relevance, recency, and knapsack density scores.*
+
+![Chat & Live Inspector](docs/images/chat_inspector.png)
+
+### 2. Context Scheduler vs. Vector RAG (Side-by-Side)
+*Direct comparison demonstrating how standard Vector RAG floods context with repetitive alert copies, while Context Scheduler purges $>90\%$ semantic duplicates and packs additional distinct facts into the freed token budget.*
+
+![Scheduler vs Vector RAG](docs/images/comparison_view.png)
+
+### 3. Memory Store Explorer & Scenario Presets
+*Searchable, filterable memory store supporting custom memory insertion with retroactive timestamp backdating, alongside 1-click synthetic benchmark loaders.*
+
+![Memory Store Explorer](docs/images/memory_store.png)
+
+### 4. Interactive Benchmark & Pareto Sweep Suite
+*Live evaluation dashboard rendering verified $N=30$ in-sample vs. held-out cross-validation tables and the 7-point token budget sweep.*
+
+![Benchmark & Sweep View](docs/images/benchmark_view.png)
+
+---
+
 ## The Problem
 
 LLMs have finite context windows, and packing them with raw conversation history causes linear cost growth, increased time-to-first-token, and "lost-in-the-middle" attention degradation. Sliding-window truncation drops critical past decisions, while standard Vector RAG retrieves purely on semantic similarity—blindly pulling outdated facts and duplicate memories that exhaust the token budget on repetitive noise.
@@ -40,7 +66,7 @@ flowchart TD
 
 ### Installation
 ```bash
-pip install sentence-transformers faiss-cpu tiktoken litellm pandas matplotlib pytest python-dotenv
+pip install sentence-transformers faiss-cpu tiktoken litellm pandas matplotlib pytest python-dotenv fastapi uvicorn
 ```
 
 ### Basic Usage
@@ -64,6 +90,24 @@ prompt_context = ctx.build(
 
 print(prompt_context)
 ```
+
+---
+
+## Running the Web UI Locally
+
+1. **Start the FastAPI backend server:**
+   ```bash
+   python server.py
+   ```
+   *(Runs on `http://127.0.0.1:8000` with Swagger docs at `http://127.0.0.1:8000/docs`)*
+
+2. **Start the React frontend application:**
+   ```bash
+   cd ui
+   npm install
+   npm run dev
+   ```
+   *(Opens on `http://localhost:5173`)*
 
 ---
 
@@ -145,11 +189,12 @@ The following capabilities were explicitly deferred from v1 to control architect
 
 ## Tech Stack
 
-- **Core Logic:** Python 3.10+
+- **Core Engine:** Python 3.10+
 - **Embedding Model:** `sentence-transformers` (`all-MiniLM-L6-v2`, 384-dimensional dense vectors)
 - **Vector Search:** `faiss-cpu` (`IndexFlatIP` on normalized vectors)
 - **Tokenizer:** `tiktoken` (`cl100k_base` BPE encoding)
 - **Evaluation & LLM Judge:** `litellm` routed to Groq (`openai/gpt-oss-120b`), `pandas`, `matplotlib`
+- **Full-Stack Web UI:** FastAPI, Uvicorn, React, Vite, Tailwind CSS, Lucide Icons
 
 ---
 
